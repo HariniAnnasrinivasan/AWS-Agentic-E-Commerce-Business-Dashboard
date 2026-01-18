@@ -1,36 +1,298 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📊 E-Commerce Business Analytics Dashboard
+AI-Powered Business Intelligence Platform Using AWS Bedrock Agents
 
-## Getting Started
+This project is a complete end-to-end AI-driven Business Analytics Dashboard built for an e-commerce platform.
+It provides smart insights, operational intelligence, and business monitoring using AWS Bedrock Agents, RDS (PostgreSQL), and a fully interactive UI.
 
-First, run the development server:
+It includes:
 
-```bash
+📈 Revenue Insights
+
+📦 Product Performance Analysis
+
+⭐ Customer Feedback Intelligence
+
+⚙️ Operations Efficiency Analysis
+
+🤖 AI Chat Assistants for every business domain
+
+🔐 Secure Admin Login System
+
+🗄️ Real database-driven visualizations
+
+This dashboard is designed for Business Admins to observe, analyze, and optimize the performance of their e-commerce business.
+
+🚀 Features Overview
+🔐 1. Secure Admin Login System
+
+Username + password authentication
+
+Passwords stored as bcrypt hashes
+
+Protected routes for all dashboards
+
+Token-based auth (session-<id>-<timestamp>)
+
+Auto-redirect to login if unauthenticated
+
+📊 2. Main Business Dashboard
+
+Includes high-level KPIs such as:
+
+Total revenue
+
+Daily/Monthly revenue trend
+
+Best-selling category
+
+Most active cities
+
+Payment success vs failure
+
+Order completion efficiency
+
+All graphs are powered directly from the PostgreSQL RDS database.
+
+💰 3. Revenue Insight Agent
+
+AI agent connected to AWS Bedrock that can:
+
+Analyze revenue patterns
+
+Identify high-performing cities
+
+Compute month-over-month growth
+
+Detect revenue decline triggers
+
+Answer complex revenue-related queries
+
+Includes visualizations:
+
+Daily revenue trend
+
+Category-wise revenue
+
+City-wise revenue comparison
+
+📦 4. Product Performance Agent
+
+Helps the admin understand product-level metrics:
+
+Best-selling products
+
+Revenue by product
+
+Inventory stock levels
+
+Category & brand performance
+
+Low-stock alerts
+
+AI Agent chat can answer:
+
+“Which category performed best this month?”
+
+“Which products need restocking?”
+
+“Show weak-performing products.”
+
+⭐ 5. Customer Feedback Intelligence Agent
+
+Provides insights extracted from product_feedback table:
+
+Sentiment analysis (Happy / Neutral / Sad)
+
+Daily sentiment trends
+
+Product-level feedback summaries
+
+Most complained products
+
+Positive vs negative feedback ratio
+
+AI Agent chat can answer:
+
+“Why are customers unhappy this week?”
+
+“Which product has the most negative feedback?”
+
+⚙️ 6. Business Operations Efficiency Agent
+
+A powerful agent covering:
+
+Delivery delays
+
+Processing delays
+
+Payment slowdowns
+
+Cancellation issues
+
+City-wise operational breakdown
+
+Recommendations based on backend data
+
+Special advanced features:
+
+Order processing delay detection
+
+Delivery delay grouping by cities
+
+Panoramic delay analysis (top 3 cities per delay type)
+
+🗄️ Database Schema (RDS PostgreSQL)
+
+The project uses multiple relational tables including:
+
+customers
+
+orders
+
+order_items
+
+payments
+
+deliveries
+
+refunds
+
+product_feedback
+
+order_status_history
+
+discounts
+
+revenue_strategy_factors
+
+past_strategy_summary
+
+admin_users (for login)
+
+All agents & dashboards query this database using optimized SQL.
+
+🤖 AWS Bedrock Agent Architecture
+
+Each domain has its own dedicated Bedrock Agent:
+
+1️⃣ Revenue Insight Agent
+2️⃣ Product Performance Agent
+3️⃣ Feedback Intelligence Agent
+4️⃣ Business Operations Efficiency Agent
+
+Each agent includes:
+
+A system prompt defining behavior
+
+1–5 Action Groups with OpenAPI schemas
+
+AWS Lambda functions following this response format:
+
+{
+  "messageVersion": "1.0",
+  "response": {
+    "actionGroup": "string",
+    "apiPath": "string",
+    "httpMethod": "POST",
+    "httpStatusCode": 200,
+    "responseBody": {
+      "application/json": {
+        "body": "{JSON_STRING}"
+      }
+    }
+  }
+}
+
+
+This ensures consistent behavior across all agents.
+
+🧩 UI Architecture
+
+The UI contains:
+
+✔ Main Dashboard
+✔ Individual Agent Pages
+
+Revenue
+
+Product Performance
+
+Feedback Intelligence
+
+Business Operations Efficiency
+
+✔ Chat Interfaces
+
+Each page has a “Ask Personalized Questions” button to open a chat panel.
+The chat interacts with the corresponding Bedrock agent via backend API.
+
+✔ Secure Authentication Flow
+
+/login → public
+
+All other pages → protected
+
+Token saved & verified for every request
+
+🛠️ Tech Stack
+Frontend
+
+Antigravity UI Framework
+
+React
+
+Modern responsive components
+
+Recharts / Chart.js style charts
+
+JWT-like session tokens
+
+Backend
+
+Node.js
+
+Express API routes
+
+PostgreSQL (AWS RDS)
+
+Bcrypt for password hashing
+
+AI
+
+AWS Bedrock
+
+Nova Lite foundation models
+
+Action Groups
+
+Lambdas
+
+Knowledge bases
+
+🔌 How to Run the Project
+1. Clone the repository
+git clone <your-repo-url>
+cd project-folder
+
+2. Install dependencies
+npm install
+
+3. Set environment variables
+
+Create .env:
+
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+DB_NAME=
+REGION=
+AGENT_ID=
+AGENT_ALIAS_ID=
+
+4. Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Login credentials
+Username: admin
+Password: Admin@123
